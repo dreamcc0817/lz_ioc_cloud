@@ -23,8 +23,26 @@ import java.util.Map;
 @Service("authentication")
 public class AuthenticationManagementServiceImpl implements AuthenticationManagementService {
 	@Override
-	public String authentication(HttpsUtil httpsUtil, String loginUrl, Map<String, String> loginInfo) throws Exception {
+	public void authentication(HttpsUtil httpsUtil, String loginUrl, Map<String, String> loginInfo) throws Exception {
+		String accessToken = createToken(httpsUtil, loginUrl, loginInfo);
+		RedisUtil.getJedis().set("accessToken", accessToken);
+	}
 
+	@Override
+	public void refreshToken(HttpsUtil httpsUtil, String loginUrl, String urlRefreshToken, Map<String, String> loginInfo) throws Exception {
+		String jsonRequest = JsonUtil.jsonObj2Sting(loginInfo);
+		String refreshToken = createToken(httpsUtil, loginUrl, loginInfo);
+
+		loginInfo.put("refreshToken", refreshToken);
+
+		StreamClosedHttpResponse bodyRefreshToken = httpsUtil.doPostJsonGetStatusLine(urlRefreshToken, jsonRequest);
+
+		log.info("RefreshToken, response content:");
+		log.info(bodyRefreshToken.getStatusLine() + "");
+		log.info(bodyRefreshToken.getContent());
+	}
+
+	public String createToken(HttpsUtil httpsUtil, String loginUrl, Map<String, String> loginInfo) throws Exception{
 		StreamClosedHttpResponse responseLogin = httpsUtil.doPostFormUrlEncodedGetStatusLine(loginUrl, loginInfo);
 
 		log.info("app auth success,return accessToken:" + responseLogin.getStatusLine());
@@ -32,21 +50,8 @@ public class AuthenticationManagementServiceImpl implements AuthenticationManage
 
 		Map<String, String> data = new HashMap<>();
 		data = JsonUtil.jsonString2SimpleObj(responseLogin.getContent(), data.getClass());
-
 		String accessToken = data.get("accessToken");
-		RedisUtil.getJedis().set("accessToken",accessToken);
-		return accessToken;
-	}
 
-	@Override
-	public String refreshToken(HttpsUtil httpsUtil,String loginUrl,String urlRefreshToken, Map<String, String> loginInfo) throws Exception {
-		String jsonRequest = JsonUtil.jsonObj2Sting(loginInfo);
-		String refreshToken = authentication(httpsUtil,loginUrl,loginInfo);
-		loginInfo.put("refreshToken",refreshToken);
-		StreamClosedHttpResponse bodyRefreshToken = httpsUtil.doPostJsonGetStatusLine(urlRefreshToken, jsonRequest);
-		log.info("RefreshToken, response content:");
-		log.info(bodyRefreshToken.getStatusLine()+"");
-		log.info(bodyRefreshToken.getContent());
-		return refreshToken;
+		return accessToken;
 	}
 }

@@ -14,25 +14,23 @@ import java.util.Map;
  */
 public interface AuthenticationManagementService {
 	/**
-	 * authentication
+	 * authentication 认证，获取Token
 	 *
 	 * @param httpsUtil
 	 * @param loginUrl
 	 * @param loginInfo
 	 * @return
-	 * @Description: 认证，获取Token
 	 */
-	String authentication(HttpsUtil httpsUtil, String loginUrl, Map<String, String> loginInfo) throws Exception;
+	void authentication(HttpsUtil httpsUtil, String loginUrl, Map<String, String> loginInfo) throws Exception;
 
 	/**
-	 * refreshToken
+	 * refreshToken 重新获取Token
 	 *
 	 * @param httpsUtil
 	 * @param loginUrl
 	 * @param urlRefreshToken
 	 * @param loginInfo
 	 * @return
-	 * @Description: 重新获取Token
 	 */
-	String refreshToken(HttpsUtil httpsUtil, String loginUrl,String urlRefreshToken, Map<String, String> loginInfo) throws Exception;
+	void refreshToken(HttpsUtil httpsUtil, String loginUrl,String urlRefreshToken, Map<String, String> loginInfo) throws Exception;
 }

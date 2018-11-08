@@ -51,4 +51,17 @@ public class AuthenticationManagerController {
 		authenticationManagementService.authentication(httpsUtil,urlLogin,loginInfo);
 		return "SUCCESS";
 	}
+
+	@GetMapping("/refresh")
+	public String refreshToken() throws Exception{
+		String refreshToken = "";
+		String appId = Constant.APPID;
+		String secret = Constant.SECRET;
+		String urlLogin = Constant.APP_AUTH;
+		Map<String, String> loginInfo = new HashMap<>();
+		loginInfo.put("appId", appId);
+		loginInfo.put("secret", secret);
+		authenticationManagementService.refreshToken(httpsUtil,urlLogin,refreshToken,loginInfo);
+		return "SUCCESS";
+	}
 }
