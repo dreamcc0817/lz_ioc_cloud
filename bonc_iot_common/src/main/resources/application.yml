@@ -1,13 +1,8 @@
 server:
-  port: 8001
-#spring:
-#  application:
-#    name: eureka
-#eureka:
-#  instance:
-#    hostname: localhost
-#    prefer-ip-address: false
-#  client:
-#    registerWithEureka: true
-#    fetchRegistry: true
-#    serviceUrl:
+  port: 9001
+#  ssl:
+#    key-store: server.keystore
+#    key-alias: tomcat
+#    enabled: true
+#    key-store-password: 123456
+#    key-store-type: JKS

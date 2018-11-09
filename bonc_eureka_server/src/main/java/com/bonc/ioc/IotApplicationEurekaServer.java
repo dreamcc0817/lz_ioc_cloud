@@ -1,8 +1,8 @@
-package com.bonc;
+package com.bonc.ioc;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
+import org.springframework.cloud.netflix.eureka.server.EnableEurekaServer;
 
 /**
  * @Title: lz_ioc_cloud
@@ -12,10 +12,10 @@ import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
  * @Date: 2018-11-06 14:29
  * @Version: V1.0
  */
-@EnableEurekaClient
+@EnableEurekaServer
 @SpringBootApplication
-public class IotApplication {
+public class IotApplicationEurekaServer {
 	public static void main(String[] args) {
-		SpringApplication.run(IotApplication.class, args);
+		SpringApplication.run(IotApplicationEurekaServer.class);
 	}
 }

@@ -2,15 +2,15 @@ server:
   port: 8090
 spring:
   rabbitmq:
-    host: 172.16.17.130
+    host: localhost
     port: 5672
     username: guest
     password: guest
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/ioc_iot
+    url: jdbc:mysql://localhost:3306/world
     username: root
-    password: 123456
+    password: root
   redis:
     host: localhost
     port: 6379
@@ -23,17 +23,17 @@ spring:
     database: 0
     timeout: 0
   application:
-    name: micro-test
+    name: lziot
   profiles:
     active: dev
-  cloud:
-    config:
-        fail-fast: false
-        discovery:
-          service-id: mcp-config
-          enabled: true
-        profile: ${spring.profiles.active}
-        label: master
+#  cloud:
+#    config:
+#        fail-fast: false
+#        discovery:
+#          service-id: mcp-config
+#          enabled: true
+#        profile: ${spring.profiles.active}
+#        label: master
   mail:
     host: smtp.163.com
     username: 15101128707@163.com
@@ -46,11 +46,11 @@ mybatis-plus:
 ---
 spring:
   profiles: dev
-  zipkin:
-    base-url: http://172.16.17.130:7001
-  sleuth:
-    sampler:
-      percentage: 1.0
+#  zipkin:
+#    base-url: http://172.16.17.130:7001
+#  sleuth:
+#    sampler:
+#      percentage: 1.0
 eureka:
   instance:
     prefer-ip-address: true
@@ -58,5 +58,5 @@ eureka:
     lease-expiration-duration-in-seconds: 20
   client:
     serviceUrl:
-      defaultZone: http://mcp:mcp@172.16.17.130:1025/eureka
+      defaultZone: http://localhost:8001/eureka
     registry-fetch-interval-seconds: 10

@@ -25,7 +25,7 @@ import java.util.Map;
 public class AuthenticationSubscribtion {
 
 	@GetMapping("/start")
-	public void authenticationSubscribtion() throws Exception{
+	public void authenticationSubscribtion(int id) throws Exception{
 
 		// Two-Way Authentication
 		HttpsUtil httpsUtil = new HttpsUtil();
