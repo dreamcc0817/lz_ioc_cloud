@@ -14,6 +14,7 @@ import org.apache.http.entity.mime.content.FileBody;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.message.BasicNameValuePair;
+import org.springframework.util.ResourceUtils;
 
 import javax.net.ssl.KeyManagerFactory;
 import javax.net.ssl.SSLContext;
@@ -55,19 +56,22 @@ public class HttpsUtil {
 	 * */
 	public void initSSLConfigForTwoWay() throws Exception {
 		// 1 Import your own certificate
-		String demo_base_Path = System.getProperty("user.dir");
-		String selfcertpath = demo_base_Path + Constant.SELFCERTPATH;
-		String trustcapath = demo_base_Path + Constant.TRUSTCAPATH;
-
+//		String demo_base_Path = System.getProperty("user.dir");
+//		String selfcertpath = demo_base_Path + Constant.SELFCERTPATH;
+//		System.out.println("############################selfcertpath = " + selfcertpath);
+//		String trustcapath = demo_base_Path + Constant.TRUSTCAPATH;
+//		System.out.println("############################trustcapath = " + trustcapath);
+////		String selfcertpath = Constant.SELFCERTPATH;
+//		String trustcapath = Constant.TRUSTCAPATH;
 		KeyStore selfCert = KeyStore.getInstance("pkcs12");
-		selfCert.load(new FileInputStream(selfcertpath),
+		selfCert.load(new FileInputStream(ResourceUtils.getFile("classpath:"+Constant.SELFCERTPATH)),
 				Constant.SELFCERTPWD.toCharArray());
 		KeyManagerFactory kmf = KeyManagerFactory.getInstance("sunx509");
 		kmf.init(selfCert, Constant.SELFCERTPWD.toCharArray());
 
 		// 2 Import the CA certificate of the server,
 		KeyStore caCert = KeyStore.getInstance("jks");
-		caCert.load(new FileInputStream(trustcapath), Constant.TRUSTCAPWD.toCharArray());
+		caCert.load(new FileInputStream(ResourceUtils.getFile("classpath:"+Constant.TRUSTCAPATH)), Constant.TRUSTCAPWD.toCharArray());
 		TrustManagerFactory tmf = TrustManagerFactory.getInstance("sunx509");
 		tmf.init(caCert);
 

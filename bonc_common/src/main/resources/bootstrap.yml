@@ -35,9 +35,9 @@ spring:
 #        profile: ${spring.profiles.active}
 #        label: master
   mail:
-    host: smtp.163.com
-    username: 15101128707@163.com
-    password: cxy0714
+    host: mail.bonc.com.cn
+    username: liuchang3@bonc.com.cn
+    password: LiuChang0817
     default-encoding: UTF-8
     port: 25
     properties: {mail.smtp.auth: true,mail.smtp.timeout: 25000}
@@ -58,5 +58,6 @@ eureka:
     lease-expiration-duration-in-seconds: 20
   client:
     serviceUrl:
+      #defaultZone: http://172.16.4.13:8001/eureka
       defaultZone: http://localhost:8001/eureka
     registry-fetch-interval-seconds: 10

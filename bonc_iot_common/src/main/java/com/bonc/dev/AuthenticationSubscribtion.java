@@ -7,6 +7,7 @@ import com.bonc.utils.StreamClosedHttpResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.http.HttpResponse;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.HashMap;
@@ -22,15 +23,15 @@ import java.util.Map;
  */
 @Slf4j
 @RestController
+@RequestMapping("/dev")
 public class AuthenticationSubscribtion {
 
 	@GetMapping("/start")
-	public void authenticationSubscribtion(int id) throws Exception{
+	public void authenticationSubscribtion() throws Exception{
 
 		// Two-Way Authentication
 		HttpsUtil httpsUtil = new HttpsUtil();
 		httpsUtil.initSSLConfigForTwoWay();
-
 		// Authentication，get token
 		String accessToken = login(httpsUtil);
 
@@ -44,15 +45,15 @@ public class AuthenticationSubscribtion {
 		Map<String, Object> paramSubscribe_deviceDataChanged = new HashMap<>();
 		paramSubscribe_deviceDataChanged.put("notifyType", notifyType_deviceDataChanged);
 		paramSubscribe_deviceDataChanged.put("callbackUrl", callbackurl_deviceDataChanged);
-
+		paramSubscribe_deviceDataChanged.put("appId","zOfrnnJLUYqcrEdvaU7EChYK5HYa");
 		String jsonRequest_deviceDataChanged = JsonUtil.jsonObj2Sting(paramSubscribe_deviceDataChanged);
 
 		Map<String, String> header_deviceDataChanged = new HashMap<>();
 		header_deviceDataChanged.put(Constant.HEADER_APP_KEY, appId);
 		header_deviceDataChanged.put(Constant.HEADER_APP_AUTH, "Bearer" + " " + accessToken);
 
-		HttpResponse httpResponse_deviceDataChanged = httpsUtil.doPostJson(urlSubscribeServiceNotification, header_deviceDataChanged, jsonRequest_deviceDataChanged);
 
+		HttpResponse httpResponse_deviceDataChanged = httpsUtil.doPostJson(urlSubscribeServiceNotification, header_deviceDataChanged, jsonRequest_deviceDataChanged);
 		String bodySubscribe_deviceDataChanged = httpsUtil.getHttpResponseBody(httpResponse_deviceDataChanged);
 
 		log.info("SubscribeServiceNotification: " + notifyType_deviceDataChanged + ", response content:");

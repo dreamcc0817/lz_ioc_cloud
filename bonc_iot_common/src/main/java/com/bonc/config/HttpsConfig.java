@@ -6,8 +6,6 @@ import org.apache.tomcat.util.descriptor.web.SecurityCollection;
 import org.apache.tomcat.util.descriptor.web.SecurityConstraint;
 import org.springframework.boot.context.embedded.EmbeddedServletContainerFactory;
 import org.springframework.boot.context.embedded.tomcat.TomcatEmbeddedServletContainerFactory;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 
 /**
  * @Title: lz_ioc_cloud
@@ -17,9 +15,9 @@ import org.springframework.context.annotation.Configuration;
  * @Date: 2018-11-08 11:11
  * @Version: V1.0
  */
-@Configuration
+//@Configuration
 public class HttpsConfig {
-	@Bean
+	//@Bean
 	public EmbeddedServletContainerFactory servletContainerFactory() {
 		TomcatEmbeddedServletContainerFactory tomcatConfig = new TomcatEmbeddedServletContainerFactory() {
 			@Override
