@@ -14,14 +14,13 @@ import org.apache.http.entity.mime.content.FileBody;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.message.BasicNameValuePair;
-import org.springframework.util.ResourceUtils;
 
 import javax.net.ssl.KeyManagerFactory;
 import javax.net.ssl.SSLContext;
 import javax.net.ssl.TrustManagerFactory;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.URISyntaxException;
 import java.security.KeyStore;
 import java.util.LinkedList;
@@ -64,14 +63,18 @@ public class HttpsUtil {
 ////		String selfcertpath = Constant.SELFCERTPATH;
 //		String trustcapath = Constant.TRUSTCAPATH;
 		KeyStore selfCert = KeyStore.getInstance("pkcs12");
-		selfCert.load(new FileInputStream(ResourceUtils.getFile("classpath:"+Constant.SELFCERTPATH)),
-				Constant.SELFCERTPWD.toCharArray());
+		InputStream selfCertStream = getClass().getClassLoader().getResourceAsStream(Constant.SELFCERTPATH);
+//		selfCert.load(new FileInputStream(ResourceUtils.getFile("classpath:"+Constant.SELFCERTPATH)),
+//				Constant.SELFCERTPWD.toCharArray());
+		selfCert.load(selfCertStream,Constant.SELFCERTPWD.toCharArray());
 		KeyManagerFactory kmf = KeyManagerFactory.getInstance("sunx509");
 		kmf.init(selfCert, Constant.SELFCERTPWD.toCharArray());
 
 		// 2 Import the CA certificate of the server,
 		KeyStore caCert = KeyStore.getInstance("jks");
-		caCert.load(new FileInputStream(ResourceUtils.getFile("classpath:"+Constant.TRUSTCAPATH)), Constant.TRUSTCAPWD.toCharArray());
+		InputStream caCertStream = getClass().getClassLoader().getResourceAsStream(Constant.TRUSTCAPATH);
+		//caCert.load(new FileInputStream(ResourceUtils.getFile("classpath:"+Constant.TRUSTCAPATH)), Constant.TRUSTCAPWD.toCharArray());
+		caCert.load(caCertStream, Constant.TRUSTCAPWD.toCharArray());
 		TrustManagerFactory tmf = TrustManagerFactory.getInstance("sunx509");
 		tmf.init(caCert);
 
