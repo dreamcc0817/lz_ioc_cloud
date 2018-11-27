@@ -24,39 +24,35 @@ import javax.annotation.Resource;
 @Order(-1)
 public class GlobalExceptionHandler {
 
-    private Logger log = LoggerFactory.getLogger(this.getClass());
+	private Logger log = LoggerFactory.getLogger(this.getClass());
 
-    @Resource
-    private LogSend logSend;
+	@Resource
+	private LogSend logSend;
 
-    /**
-     * 拦截业务异常
-     */
-    @ExceptionHandler(McpException.class)
-    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
-    @ResponseBody
-    public AppReply notFount(McpException e) {
-        logSend.sendMcpException(e);
-         String msg= e.getCause()+""+e.getStackTrace()[0]+(e.getStackTrace()[0].getLineNumber()+"")+e.getStackTrace()[0].getMethodName();
-        log.error("业务异常:", msg);
-         return AppReply.error(e.getCode()+"", e.toString());
-    }
-
-
+	/**
+	 * 拦截业务异常
+	 */
+	@ExceptionHandler(McpException.class)
+	@ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+	@ResponseBody
+	public AppReply notFount(McpException e) {
+		//logSend.sendMcpException(e);
+		String msg = e.getCause() + "" + e.getStackTrace()[0] + (e.getStackTrace()[0].getLineNumber() + "") + e.getStackTrace()[0].getMethodName();
+		log.error("业务异常:", msg);
+		return AppReply.error(e.getCode() + "", e.toString());
+	}
 
 
-
-
-    /**
-     * 拦截未知的运行时异常
-     */
-    @ExceptionHandler(RuntimeException.class)
-    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
-    @ResponseBody
-    public AppReply notFount(RuntimeException e) {
-        logSend.sendRuntimeException(e);
-        String msg= e.getCause()+""+e.getStackTrace()[0]+(e.getStackTrace()[0].getLineNumber()+"")+e.getStackTrace()[0].getMethodName();
-        log.error("运行时异常:", msg);
-        return AppReply.error(msg);
-    }
+	/**
+	 * 拦截未知的运行时异常
+	 */
+	@ExceptionHandler(RuntimeException.class)
+	@ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+	@ResponseBody
+	public AppReply notFount(RuntimeException e) {
+		//logSend.sendRuntimeException(e);
+		String msg = e.getCause() + "" + e.getStackTrace()[0] + (e.getStackTrace()[0].getLineNumber() + "") + e.getStackTrace()[0].getMethodName();
+		log.error("运行时异常:", msg);
+		return AppReply.error(msg);
+	}
 }

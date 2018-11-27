@@ -1,39 +1,83 @@
+#server:
+#  port: 8090
+#spring:
+##  rabbitmq:
+##    host: localhost
+##    port: 5672
+##    username: guest
+##    password: guest
+#  datasource:
+#    driver-class-name: com.mysql.jdbc.Driver
+#    url: jdbc:mysql://localhost:3306/world
+#    username: root
+#    password: root
+##  redis:
+##    host: localhost
+##    port: 6379
+##    pool:
+##      max-active: 10
+##      min-idle: 0
+##      max-wait: 2000
+##      max-idle: 8
+##    password:
+##    database: 0
+##    timeout: 0
+#  application:
+#    name: lziot
+#  profiles:
+#    active: dev
+##  cloud:
+##    config:
+##        fail-fast: false
+##        discovery:
+##          service-id: mcp-config
+##          enabled: true
+##        profile: ${spring.profiles.active}
+##        label: master
+#  mail:
+#    host: mail.bonc.com.cn
+#    username: liuchang3@bonc.com.cn
+#    password: LiuChang0817
+#    default-encoding: UTF-8
+#    port: 25
+#    properties: {mail.smtp.auth: true,mail.smtp.timeout: 25000}
+#mybatis-plus:
+#  mapper-locations: classpath:mapper/*xml
+#---
+#spring:
+#  profiles: ioc
+##  zipkin:
+##    base-url: http://172.16.17.130:7001
+##  sleuth:
+##    sampler:
+##      percentage: 1.0
+#eureka:
+#  instance:
+#    prefer-ip-address: true
+#    lease-renewal-interval-in-seconds: 5
+#    lease-expiration-duration-in-seconds: 20
+#  client:
+#    serviceUrl:
+#      #defaultZone: http://172.16.4.13:8001/eureka
+#      defaultZone: http://localhost:8001/eureka
+#    registry-fetch-interval-seconds: 10
+#mybatis-plus:
+#  type-handlers-package: com.bonc.ioc.core.handler.MybatisJsonTypeHandler
+
+####################################################################
+
 server:
   port: 8090
 spring:
-  rabbitmq:
-    host: localhost
-    port: 5672
-    username: guest
-    password: guest
   datasource:
-    driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/world
-    username: root
-    password: root
-  redis:
-    host: localhost
-    port: 6379
-    pool:
-      max-active: 10
-      min-idle: 0
-      max-wait: 2000
-      max-idle: 8
-    password:
-    database: 0
-    timeout: 0
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://100.125.100.3:25308/ioc
+    username: ioc1
+    password: 12Wsxzaq
   application:
     name: lziot
   profiles:
     active: dev
-#  cloud:
-#    config:
-#        fail-fast: false
-#        discovery:
-#          service-id: mcp-config
-#          enabled: true
-#        profile: ${spring.profiles.active}
-#        label: master
   mail:
     host: mail.bonc.com.cn
     username: liuchang3@bonc.com.cn
@@ -46,11 +90,6 @@ mybatis-plus:
 ---
 spring:
   profiles: dev
-#  zipkin:
-#    base-url: http://172.16.17.130:7001
-#  sleuth:
-#    sampler:
-#      percentage: 1.0
 eureka:
   instance:
     prefer-ip-address: true

@@ -1,7 +1,6 @@
 package com.bonc.appAccessSecurity.service.impl;
 
 import com.bonc.appAccessSecurity.service.AuthenticationManagementService;
-import com.bonc.ioc.core.util.RedisUtil;
 import com.bonc.utils.HttpsUtil;
 import com.bonc.utils.JsonUtil;
 import com.bonc.utils.StreamClosedHttpResponse;
@@ -25,7 +24,7 @@ public class AuthenticationManagementServiceImpl implements AuthenticationManage
 	@Override
 	public void authentication(HttpsUtil httpsUtil, String loginUrl, Map<String, String> loginInfo) throws Exception {
 		String accessToken = createToken(httpsUtil, loginUrl, loginInfo);
-		RedisUtil.getJedis().set("accessToken", accessToken);
+		//RedisUtil.getJedis().set("accessToken", accessToken);
 	}
 
 	@Override

@@ -1,4 +1,4 @@
-//package com.bonc.dev;
+//package com.bonc.ioc;
 //
 //import com.bonc.utils.Constant;
 //import com.bonc.utils.HttpsUtil;
@@ -15,7 +15,7 @@
 //
 ///**
 // * @Title: lz_ioc_cloud
-// * @Package: com.bonc.dev
+// * @Package: com.bonc.ioc
 // * @Description: 鉴权认证，订阅消息
 // * @Author: dreamcc
 // * @Date: 2018-11-08 09:09
@@ -23,7 +23,7 @@
 // */
 //@Slf4j
 //@RestController
-//@RequestMapping("/dev")
+//@RequestMapping("/ioc")
 //public class AuthenticationSubscribtion {
 //
 //	@GetMapping("/start")

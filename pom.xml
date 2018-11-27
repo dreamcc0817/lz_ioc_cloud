@@ -5,17 +5,17 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.bonc</groupId>
-    <artifactId>lz_ioc_cloud</artifactId>
+    <artifactId>lz-ioc-cloud</artifactId>
     <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
     <modules>
-        <module>bonc_common</module>
-        <module>bonc_iot_common</module>
         <module>bonc_eureka_server</module>
+        <module>bonc_iot_common</module>
+        <module>bonc_common</module>
     </modules>
 
     <properties>
-        <java.version>1.8</java.version>
+        <java.version>1.7</java.version>
         <spring-boot.version>1.5.9.RELEASE</spring-boot.version>
         <spring-cloud.version>Edgware.SR3</spring-cloud.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -219,9 +219,22 @@
                     <groupId>org.springframework.boot</groupId>
                     <artifactId>spring-boot-maven-plugin</artifactId>
                     <version>1.5.9.RELEASE</version>
+                    <configuration>
+                        <includeSystemScope>true</includeSystemScope>
+                    </configuration>
                 </plugin>
             </plugins>
         </pluginManagement>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>1.5.9.RELEASE</version>
+                <configuration>
+                    <includeSystemScope>true</includeSystemScope>
+                </configuration>
+            </plugin>
+        </plugins>
     </build>
 
 </project>
